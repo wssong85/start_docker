@@ -1,97 +1,93 @@
-# Getting Started with Create React App
+## docker command
+* 도커 실행 중 프로세스
+> docker ps --format 'table{{.Names}}\table{{.Image}}'
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* 도커 모든 프로세스
+> docker ps
 
-## Available Scripts
+* 컨테이너 실행 (create and start)
+> docker run ${imageName}
 
-In the project directory, you can run:
+* 컨테이너 생성
+> docker create ${imageName}
 
-### `npm start`
+* 컨테이너 시작
+> docker start -a ${imageName}
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* 컨테이너 중지
+> docker kill ${imageName}, docker stop ${imageName}
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* 컨테이너 삭제
+> docker rm ${imageName}
 
-### `npm test`
+* 모든 컨테이너 삭제
+> docker rm `docker ps -a -q`  => &apos; 백틱
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* 도커 이미지, 컨테이너, 네트워크 삭제
+> docker system prune
 
-### `npm run build`
+* 실행 중 컨테이너에 명령어 전달
+> docker exec -it <컨테이너아이디> redis-cli
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* 도커 참조 관련
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. 첫번쨰 참조 하지말 폴더 or 파일
+2. 두번쨰 참조할 폴더 or 파일:도커안 디렉토리
+> docker run -d -p 5000:8080 -v /usr/src/app/node_modules -v E:\workspace\docker\docker\nodejs-docker-app:/usr/src/app  tabliser/nodejs
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. it: interactive(상호적인) terminal(단말기)
+   Error response from daemon: create $(pwd): "$(pwd)" includes invalid characters for a local volume name, only "[a-zA-Z0-9][a-zA-Z0-9_.-]" are allowed. If you intended to pass a host directory, use absolute path.
+   See 'docker run --help'
+# 도커 생성
+* 베이스 이미지 명시
+> FROM baseImage
 
-### `npm run eject`
+* 추가적 필요한 파일 다운로드
+* <이미지이름>:<태그> 형식으로 작성
+* 태그를 안붙이면 자동적으로 최신 다운로드
+* ex) ubuntu:14.04
+> RUN command
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* 컨테이너 시작 시 실행 될 명령어 명시
+> cmd ["executable"]
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* docker 빌드
+> docker build ./
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* docker 네이밍 빌드
+> docker build -t tabliser/hello:latest ./
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+> docker run tabliser/hello
 
-## Learn More
+# docker compose
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`docker compose 파일 위치로 이동`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* docker compose 실행
+> docker compose up
 
-### Code Splitting
+* docker compose 빌드 후 재실행
+> docker compose up --build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* docker compose 빌드 후 재실행
+> docker compose up -d --build
 
-### Analyzing the Bundle Size
+* docker compose 중지
+> docker compose down
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# react-app 으로 도커 실행
 
-### Making a Progressive Web App
+* 임의의 도커파일로 빌드
+> docker build -f Dockerfile.dev ./
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+* 임의의 도커파일 이미지이름으로 빌드
+> docker build -f Dockerfile.dev -t tabliser/docker-react ./
 
-### Advanced Configuration
+* 포트포워딩 추가하며 도커파일 run
+> docker run -p 3000:3000 tabliser/docker-react
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* 포트포워딩 추가하며 도커파일 run (안될경우 -it 추가)
+> docker run -it -p 3000:3000 tabliser/docker-react
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
-
-src refspec main does not match any
-
-
-…or create a new repository on the command line
-`
-echo "# start_docker" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/wssong85/start_docker.git
-git push -u origin main
-`
-…or push an existing repository from the command line
-`
-git remote add origin https://github.com/wssong85/start_docker.git
-git branch -M main
-git push -u origin main
-`
-…or import code from another repository
-`
-You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
-`
-
+* 실시간 docker 실행
+> docker run -it -p 3000:3000 -v /usr/src/app/node_modules -v E:\workspace\docker\docker\docker-react-app:/usr/src/app tabliser/docker-react
