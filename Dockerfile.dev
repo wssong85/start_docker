@@ -1,0 +1,16 @@
+FROM node:alpine
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+
+RUN npm install
+
+COPY ./ ./
+
+ENV CHOKIDAR_USEPOLLING=true
+
+CMD ["npm", "run", "start"]
+
+# docker run -it -p 3000:3000 -v /usr/src/app/node_modules -v E:\workspace\docker\docker\docker-react-app:/usr/src/app tabliser/docker-react
+# docker run -it -p 3000:3000 -e CHOKIDAR_USEPOLLING=true -v /usr/src/app/node_modules -v E:\workspace\docker\docker\docker-react-app:/usr/src/app tabliser/docker-react
