@@ -68,3 +68,30 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+
+src refspec main does not match any
+
+
+…or create a new repository on the command line
+`
+echo "# start_docker" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/wssong85/start_docker.git
+git push -u origin main
+`
+…or push an existing repository from the command line
+`
+git remote add origin https://github.com/wssong85/start_docker.git
+git branch -M main
+git push -u origin main
+`
+…or import code from another repository
+`
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+`
+
