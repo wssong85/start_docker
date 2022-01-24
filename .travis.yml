@@ -26,6 +26,3 @@ deploy:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_ACCESS_KEY
-
-#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
-#  [Instance: i-081bdb37865a7e39e] Command failed on instance. Return code: 1 Output: No EXPOSE directive found in Dockerfile, abort deployment. Hook /opt/elasticbeanstalk/hooks/appdeploy/enact/00run.sh failed. For more detail, check /var/log/eb-activity.log using console or EB CLI.
