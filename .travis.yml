@@ -7,7 +7,7 @@ services:
 
 before_install:
   - echo "start creating an image with dockerfile"
-  - docker build -t tabliser/docker-react -f Dockerfile.dev
+  - docker build -t -f Dockerfile.dev tabliser/docker-react
 
 script:
   - docker run -e CI=true tabliser/docker-react-app npm run test -- -- coverage
