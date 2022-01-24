@@ -5,10 +5,7 @@ RUN npm install
 COPY ./ ./
 RUN npm run build
 
-ENV PORT=80
-
 FROM nginx
-EXPOSE port $PORT
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-
-#
+#EXPOSE port 8081
+#CMD ["nginx", "-g", "daemon off;"]
