@@ -7,10 +7,10 @@ services:
 
 before_install:
   - echo "start creating an image with dockerfile"
-  - docker build -t tabliser/docker-react .
+  - docker build -t tabliser/docker-react-app -f Dockerfile.dev .
 
-#script:
-#  - docker run -e CI=true tabliser/docker-react npm run test -- --coverage
+script:
+  - docker run -e CI=true tabliser/docker-react-app npm run test -- --coverage
 
 #after_success:
 #  - echo "Test success"
@@ -28,3 +28,4 @@ deploy:
   secret_access_key: $AWS_SECRET_ACCESS_KEY
 
 #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
+#  [Instance: i-081bdb37865a7e39e] Command failed on instance. Return code: 1 Output: No EXPOSE directive found in Dockerfile, abort deployment. Hook /opt/elasticbeanstalk/hooks/appdeploy/enact/00run.sh failed. For more detail, check /var/log/eb-activity.log using console or EB CLI.
